@@ -23,6 +23,7 @@ set +a
 # Find and load swayinitrc
 for rc in \
     "$XDG_CONFIG_HOME/sway/swayinitrc" \
+    "$HOME/.config/sway/swayinitrc" \
     "$HOME/.swayinitrc" \
     /etc/sway/swayinitrc \
 ; do
