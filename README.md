@@ -7,7 +7,7 @@ The solution is a small script that loads the profile you're used to, then runs 
 In detail, the `swayinit` script 
 1. Reads `/etc/profile`
 2. Reads `$XDG_CONFIG_HOME/profile.d/*.sh`. If `$XDG_CONFIG_HOME` is not set, default to `$HOME/.config`.
-3. Sets the environment as specfied by `environment.d` files (see [environment.d(5)](https://man.archlinux.org/man/environment.d.5)
+3. Sets the environment as specfied by `environment.d` files. (See [environment.d(5)](https://man.archlinux.org/man/environment.d.5).)
 4. Looks for the following initialisation files and runs the first one found
    1. `$XDG_CONFIG_HOME/sway/swayinitrc`
    2. `$HOME/.config/sway/swayinitrc`
