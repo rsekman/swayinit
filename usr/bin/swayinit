@@ -4,12 +4,14 @@
 test -r /etc/profile && source /etc/profile
 
 # Load profiles from $XDG_CONFIG_HOME/profile.d/
-if test -d $XDG_CONFIG_HOME/profile.d; then
-    for profile in $XDG_CONFIG_HOME/profile.d/*.sh; do
+dir=${XDG_CONFIG_HOME:-$HOME/.config}/profile.d
+if test -d $dir; then
+    for profile in ${dir}/*.sh; do
         test -r "$profile" && source "$profile"
     done
     unset profile
 fi
+unset dir
 
 # Set environment variables from environment.d
 set -a
