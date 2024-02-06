@@ -1,0 +1,31 @@
+#!/usr/bin/sh
+
+# Load /etc/profile
+test -r /etc/profile && source /etc/profile
+
+# Load profiles from $XDG_CONFIG_HOME/profile.d/
+if test -d $XDG_CONFIG_HOME/profile.d; then
+    for profile in $XDG_CONFIG_HOME/profile.d/*.sh; do
+        test -r "$profile" && source "$profile"
+    done
+    unset profile
+fi
+
+# Set environment variables from environment.d
+set -a
+. /dev/fd/0 <<EOF
+$(/usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator)
+EOF
+set +a
+
+# Find and load swayinitrc
+for rc in \
+    "$XDG_CONFIG_HOME/sway/swayinitrc" \
+    "$HOME/.swayinitrc" \
+    /etc/sway/swayinitrc \
+; do
+    test -r $rc && source $rc && break
+done
+unset rc
+
+exec sway "$@"
